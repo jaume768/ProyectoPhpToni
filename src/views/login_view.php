@@ -63,7 +63,8 @@
 <body>
     <div class="container">
         <h2>LOGIN</h2>
-        <form action="../controllers/login_controller.php" method="post">            
+        <form action="../controllers/auth_controller.php" method="post">
+            <input type="hidden" name="action" value="login"> <!-- Hidden field to indicate the action -->
             <?php if (isset($_GET['msg'])) { ?>
                 <p class="msg"><?php echo $_GET['msg']; ?></p>
             <?php } ?><br>

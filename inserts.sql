@@ -1,77 +1,48 @@
-INSERT INTO `tranfer_hotel` (`id_hotel`, `id_zona`, `Comision`, `usuario`, `password`) VALUES
-(1, 1, 10, 1, 'password1'),
-(2, 2, 15, 2, 'password2'),
-(3, 1, 12, 3, 'password3'),
-(4, 3, 8, 4, 'password4'),
-(5, 2, 11, 5, 'password5'),
-(6, 3, 14, 6, 'password6'),
-(7, 1, 9, 7, 'password7'),
-(8, 2, 13, 8, 'password8'),
-(9, 3, 16, 9, 'password9'),
-(10, 1, 20, 10, 'password10');
-INSERT INTO `transfer_precios` (`id_precios`, `id_vehiculo`, `id_hotel`, `Precio`) VALUES
-(1, 1, 1, 50),
-(2, 2, 2, 60),
-(3, 3, 3, 55),
-(4, 4, 4, 70),
-(5, 5, 5, 65),
-(6, 6, 6, 75),
-(7, 7, 7, 80),
-(8, 8, 8, 90),
-(9, 9, 9, 85),
-(10, 10, 10, 100);
-INSERT INTO `transfer_reservas` (`id_reserva`, `localizador`, `id_hotel`, `id_tipo_reserva`, `email_cliente`, `fecha_reserva`, `fecha_modificacion`, `id_destino`, `fecha_entrada`, `hora_entrada`, `numero_vuelo_entrada`, `origen_vuelo_entrada`, `hora_vuelo_salida`, `fecha_vuelo_salida`, `num_viajeros`, `id_vehiculo`) VALUES
-(1, 'ABC123', 1, 1, 1, '2024-02-27 10:30:00', '2024-02-27 10:30:00', 1, '2024-03-01', '08:00:00', '12345', 'Airport1', '2024-03-01 09:00:00', '2024-03-01', 2, 1),
-(2, 'DEF456', 2, 2, 2, '2024-02-27 10:35:00', '2024-02-27 10:35:00', 2, '2024-03-02', '09:00:00', '67890', 'Airport2', '2024-03-02 10:00:00', '2024-03-02', 3, 2),
-(3, 'GHI789', 3, 1, 3, '2024-02-27 10:40:00', '2024-02-27 10:40:00', 3, '2024-03-03', '10:00:00', '24680', 'Airport3', '2024-03-03 11:00:00', '2024-03-03', 4, 3),
-(4, 'JKL012', 4, 2, 4, '2024-02-27 10:45:00', '2024-02-27 10:45:00', 4, '2024-03-04', '11:00:00', '13579', 'Airport4', '2024-03-04 12:00:00', '2024-03-04', 5, 4),
-(5, 'MNO345', 5, 1, 5, '2024-02-27 10:50:00', '2024-02-27 10:50:00', 5, '2024-03-05', '12:00:00', '98765', 'Airport5', '2024-03-05 13:00:00', '2024-03-05', 6, 5),
-(6, 'PQR678', 6, 2, 6, '2024-02-27 10:55:00', '2024-02-27 10:55:00', 6, '2024-03-06', '13:00:00', '54321', 'Airport6', '2024-03-06 14:00:00', '2024-03-06', 7, 6),
-(7, 'STU901', 7, 1, 7, '2024-02-27 11:00:00', '2024-02-27 11:00:00', 7, '2024-03-07', '14:00:00', '86420', 'Airport7', '2024-03-07 15:00:00', '2024-03-07', 8, 7),
-(8, 'VWX234', 8, 2, 8, '2024-02-27 11:05:00', '2024-02-27 11:05:00', 8, '2024-03-08', '15:00:00', '97531', 'Airport8', '2024-03-08 16:00:00', '2024-03-08', 9, 8),
-(9, 'YZA567', 9, 1, 9, '2024-02-27 11:10:00', '2024-02-27 11:10:00', 9, '2024-03-09', '16:00:00', '24680', 'Airport9', '2024-03-09 17:00:00', '2024-03-09', 10, 9),
-(10, 'BCD890', 10, 2, 10, '2024-02-27 11:15:00', '2024-02-27 11:15:00', 10, '2024-03-10', '17:00:00', '13579', 'Airport10', '2024-03-10 18:00:00', '2024-03-10', 11, 10);
-INSERT INTO `transfer_tipo_reserva` (`id_tipo_reserva`, `Descripción`) VALUES
-(1, 'Tipo1'),
-(2, 'Tipo2'),
-(3, 'Tipo3'),
-(4, 'Tipo4'),
-(5, 'Tipo5'),
-(6, 'Tipo6'),
-(7, 'Tipo7'),
-(8, 'Tipo8'),
-(9, 'Tipo9'),
-(10, 'Tipo10');
-INSERT INTO `transfer_vehiculo` (`id_vehiculo`, `Descripción`, `email_conductor`, `password`) VALUES
-(1, 'Vehiculo1', 'conductor1@example.com', 'password1'),
-(2, 'Vehiculo2', 'conductor2@example.com', 'password2'),
-(3, 'Vehiculo3', 'conductor3@example.com', 'password3'),
-(4, 'Vehiculo4', 'conductor4@example.com', 'password4'),
-(5, 'Vehiculo5', 'conductor5@example.com', 'password5'),
-(6, 'Vehiculo6', 'conductor6@example.com', 'password6'),
-(7, 'Vehiculo7', 'conductor7@example.com', 'password7'),
-(8, 'Vehiculo8', 'conductor8@example.com', 'password8'),
-(9, 'Vehiculo9', 'conductor9@example.com', 'password9'),
-(10, 'Vehiculo10', 'conductor10@example.com', 'password10');
-INSERT INTO `transfer_viajeros` (`id_viajero`, `nombre`, `apellido1`, `apellido2`, `direccion`, `codigoPostal`, `ciudad`, `pais`, `email`, `password`) VALUES
-(1, 'Nombre1', 'Apellido11', 'Apellido12', 'Direccion1', '12345', 'Ciudad1', 'Pais1', 'viajero1@example.com', 'password1'),
-(2, 'Nombre2', 'Apellido21', 'Apellido22', 'Direccion2', '23456', 'Ciudad2', 'Pais2', 'viajero2@example.com', 'password2'),
-(3, 'Nombre3', 'Apellido31', 'Apellido32', 'Direccion3', '34567', 'Ciudad3', 'Pais3', 'viajero3@example.com', 'password3'),
-(4, 'Nombre4', 'Apellido41', 'Apellido42', 'Direccion4', '45678', 'Ciudad4', 'Pais4', 'viajero4@example.com', 'password4'),
-(5, 'Nombre5', 'Apellido51', 'Apellido52', 'Direccion5', '56789', 'Ciudad5', 'Pais5', 'viajero5@example.com', 'password5'),
-(6, 'Nombre6', 'Apellido61', 'Apellido62', 'Direccion6', '67890', 'Ciudad6', 'Pais6', 'viajero6@example.com', 'password6'),
-(7, 'Nombre7', 'Apellido71', 'Apellido72', 'Direccion7', '78901', 'Ciudad7', 'Pais7', 'viajero7@example.com', 'password7'),
-(8, 'Nombre8', 'Apellido81', 'Apellido82', 'Direccion8', '89012', 'Ciudad8', 'Pais8', 'viajero8@example.com', 'password8'),
-(9, 'Nombre9', 'Apellido91', 'Apellido92', 'Direccion9', '90123', 'Ciudad9', 'Pais9', 'viajero9@example.com', 'password9'),
-(10, 'Nombre10', 'Apellido101', 'Apellido102', 'Direccion10', '01234', 'Ciudad10', 'Pais10', 'viajero10@example.com', 'password10');
-INSERT INTO `transfer_zona` (`id_zona`, `descripcion`) VALUES
-(1, 'Zona1'),
-(2, 'Zona2'),
-(3, 'Zona3'),
-(4, 'Zona4'),
-(5, 'Zona5'),
-(6, 'Zona6'),
-(7, 'Zona7'),
-(8, 'Zona8'),
-(9, 'Zona9'),
-(10, 'Zona10');
+INSERT INTO `transfer_zona` (`descripcion`) VALUES
+(101),
+(102),
+(103),
+(104),
+(105);
+
+INSERT INTO `transfer_viajeros` (`nombre`, `apellido1`, `apellido2`, `direccion`, `codigoPostal`, `ciudad`, `pais`, `email`, `password`, `rol`) VALUES
+('Juan', 'Pérez', 'García', 'Calle Falsa 123', '28080', 'Madrid', 'España', 'juan.perez@example.com', 'juan123', 'Particular'),
+('Ana', 'López', 'Díaz', 'Av. Siempre Viva 456', '28081', 'Madrid', 'España', 'ana.lopez@example.com', 'ana456', 'Particular'),
+('Carlos', 'Martín', 'Sánchez', 'Paseo de la Reforma 789', '28082', 'Madrid', 'España', 'carlos.martin@example.com', 'carlos789', 'Particular'),
+('Laura', 'Gómez', 'Ruiz', 'Ronda de Toledo 012', '28083', 'Madrid', 'España', 'laura.gomez@example.com', 'laura012', 'Particular'),
+('Elena', 'Moreno', 'Jiménez', 'Plaza Mayor 345', '28084', 'Madrid', 'España', 'elena.moreno@example.com', 'elena345', 'Particular');
+
+INSERT INTO `transfer_tipo_reserva` (`Descripción`) VALUES
+(1),
+(2),
+(3),
+(4),
+(5);
+
+INSERT INTO `transfer_vehiculo` (`Descripción`, `email_conductor`, `password`) VALUES
+('Vehiculo 1', 'conductor1@example.com', 'pass1'),
+('Vehiculo 2', 'conductor2@example.com', 'pass2'),
+('Vehiculo 3', 'conductor3@example.com', 'pass3'),
+('Vehiculo 4', 'conductor4@example.com', 'pass4'),
+('Vehiculo 5', 'conductor5@example.com', 'pass5');
+
+INSERT INTO `tranfer_hotel` (`id_zona`, `Comision`, `usuario`, `password`) VALUES
+(1, 10, 1, 'pass123'),
+(2, 15, 2, 'pass456'),
+(3, 20, 3, 'pass789'),
+(1, 25, 4, 'pass012'),
+(2, 30, 5, 'pass345');
+
+INSERT INTO `transfer_precios` (`id_vehiculo`, `id_hotel`, `Precio`) VALUES
+(1, 1, 50),
+(2, 2, 60),
+(3, 3, 70),
+(4, 4, 80),
+(5, 5, 90);
+
+INSERT INTO `transfer_reservas` (`localizador`, `id_hotel`, `id_tipo_reserva`, `email_cliente`, `fecha_reserva`, `fecha_modificacion`, `id_destino`, `fecha_entrada`, `hora_entrada`, `numero_vuelo_entrada`, `origen_vuelo_entrada`, `hora_vuelo_salida`, `fecha_vuelo_salida`, `num_viajeros`, `id_vehiculo`) VALUES
+('XYZ123', 1, 1, 'email@example.com', '2024-04-27 08:00:00', '2024-04-27 08:00:00', 1, '2024-05-01', '10:00:00', 'AB123', 'City1', '2024-05-01 12:00:00', '2024-05-01', 2, 1),
+('XYZ456', 2, 2, 'email2@example.com', '2024-04-27 09:00:00', '2024-04-27 09:00:00', 2, '2024-05-02', '11:00:00', 'CD456', 'City2', '2024-05-02 13:00:00', '2024-05-02', 3, 2),
+('XYZ789', 3, 1, 'email3@example.com', '2024-04-27 10:00:00', '2024-04-27 10:00:00', 3, '2024-05-03', '12:00:00', 'EF789', 'City3', '2024-05-03 14:00:00', '2024-05-03', 4, 3),
+('XYZ012', 4, 2, 'email4@example.com', '2024-04-27 11:00:00', '2024-04-27 11:00:00', 4, '2024-05-04', '13:00:00', 'GH012', 'City4', '2024-05-04 15:00:00', '2024-05-04', 5, 4),
+('XYZ345', 5, 1, 'email5@example.com', '2024-04-27 12:00:00', '2024-04-27 12:00:00', 5, '2024-05-05', '14:00:00', 'IJ345', 'City5', '2024-05-05 16:00:00', '2024-05-05', 6, 5);
