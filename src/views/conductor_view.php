@@ -31,7 +31,7 @@
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
-                events: 'loadEvents.php', // Archivo PHP que devuelve los eventos en formato JSON
+                events: 'prova.json', // Archivo PHP que devuelve los eventos en formato JSON
                 eventClick: function(calEvent, jsEvent, view) {
                     alert('Evento: ' + calEvent.title + '\nInicio: ' + calEvent.start.format() + '\nFin: ' + calEvent.end.format());
                     // Aquí podrías abrir un modal o una nueva página con detalles del evento
