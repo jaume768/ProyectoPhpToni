@@ -54,6 +54,7 @@ function loginUser($conn) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['password'])) {
+            $_SESSION['email'] = $email;
             $_SESSION['usuario_id'] = $row['id_viajero'];
             $_SESSION['rol'] = $row['rol']; // Guardar rol en sesión
             if ($row['rol'] === 'Administrador') {

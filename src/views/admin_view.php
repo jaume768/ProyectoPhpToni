@@ -2,53 +2,7 @@
 <html>
 <head>
     <title>Panel de Administración</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1e1e1e;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .admin-container {
-            margin-top:70px;
-            max-width: 800px;
-            padding: 40px 60px;
-            border-radius: 8px;
-            background-color: #333333;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        input, select, textarea {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #555555;
-            border-radius: 5px;
-            background-color: #444444;
-            color: #ffffff;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            cursor: pointer;
-            background-color: #550000;
-            transition: background-color 0.3s ease;
-        }
-        input[type="submit"]:hover {
-            background-color: #990000;
-        }
-    </style>
+    <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
 <div class="admin-container">
@@ -98,27 +52,6 @@
     </form>
 </div>
 
-<script>
-    function updateFormFields() {
-        var selectedOption = document.getElementById('tipoTrayecto').value;
-        var aeropuertoHotelFields = document.getElementById('aeropuertoHotelFields');
-        var hotelAeropuertoFields = document.getElementById('hotelAeropuertoFields');
-
-        aeropuertoHotelFields.style.display = 'none';
-        hotelAeropuertoFields.style.display = 'none';
-
-        if (selectedOption == 'aeropuertoHotel' || selectedOption == 'idaYVuelta') {
-            aeropuertoHotelFields.style.display = 'block';
-        }
-        if (selectedOption == 'hotelAeropuerto' || selectedOption == 'idaYVuelta') {
-            hotelAeropuertoFields.style.display = 'block';
-        }
-    }
-
-    // Inicializar el formulario para mostrar los campos correctos al cargar
-    document.addEventListener('DOMContentLoaded', function () {
-        updateFormFields();
-    });
-</script>
+<script src="js/formularios.js"></script>
 </body>
 </html>
