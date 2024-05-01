@@ -38,15 +38,23 @@ class UserController {
         return $reservations;
     }
 
+    public function logout() {
+        session_start();
+        session_destroy();
+        header("Location: login.php");
+        exit();
+    }
+
     public function createReservation($data) {
+        // Ensure your SQL matches the number of data fields you intend to insert
         $sql = "INSERT INTO transfer_reservas (localizador, id_hotel, id_tipo_reserva, email_cliente, fecha_reserva, fecha_modificacion, id_destino, fecha_entrada, hora_entrada, numero_vuelo_entrada, origen_vuelo_entrada, hora_vuelo_salida, fecha_vuelo_salida, num_viajeros, id_vehiculo) VALUES (?, ?, ?, ?, NOW(), NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         $stmt = $this->db->prepare($sql);
         if (!$stmt) {
             return ['success' => false, 'message' => "Error de preparación: " . $this->db->error];
         }
-    
-        // Asumiendo que todos los datos necesarios son proporcionados y son correctos
+        
+        // Here, ensure you have one type specifier for each actual variable bound
         $stmt->bind_param("siisisssssssii", 
             $data['localizador'], 
             $data['id_hotel'], 
@@ -69,6 +77,7 @@ class UserController {
             return ['success' => false, 'message' => "Error al ejecutar: " . $stmt->error];
         }
     }
+    
     
     
 }

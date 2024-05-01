@@ -46,3 +46,7 @@ $user = $userController->getUserByEmail($email);
     <input type="email" id="email" name="email" value="<?php echo $user['email']; ?>">
     <input type="submit" value="Actualizar Datos">
 </form>
+<!-- Botón de cerrar sesión -->
+<form action="../controllers/logout.php" method="post" onsubmit="return confirm('¿Estás seguro de que deseas cerrar sesión?');">
+    <button type="submit" class="button-logout">Cerrar Sesión</button>
+</form>

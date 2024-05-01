@@ -1,10 +1,6 @@
 <?php
 session_start();
 
-require_once '../controllers/UserController.php';
-
-$controller = new UserController($conn);
-
 function loadSection($section) {
     switch ($section) {
         case 'reserva':
@@ -12,32 +8,6 @@ function loadSection($section) {
             break;
         case 'datos':
             include('plantillas/datos.php');
-            break;
-        case 'create_reservation':
-            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['action'] == 'create_reservation') {
-                $data = [
-                    'localizador' => bin2hex(random_bytes(10)), 
-                    'id_hotel' => $_POST['hotelDestino'], 
-                    'id_tipo_reserva' => $_POST['tipoTrayecto'],
-                    'email_cliente' => $_SESSION['email'], 
-                    'id_destino' => $_POST['hotelDestino'],
-                    'fecha_entrada' => $_POST['diaLlegada'],
-                    'hora_entrada' => $_POST['horaLlegada'],
-                    'numero_vuelo_entrada' => $_POST['numeroVueloLlegada'],
-                    'origen_vuelo_entrada' => $_POST['origenVuelo'],
-                    'hora_vuelo_salida' => $_POST['horaVuelo'],
-                    'fecha_vuelo_salida' => $_POST['diaVuelo'],
-                    'num_viajeros' => $_POST['numViajeros'],
-                    'id_vehiculo' => 1 
-                ];
-                $result = $controller->createReservation($data);
-                if ($result['success']) {
-                    echo '<p>Reserva creada con éxito.</p>';
-                } else {
-                    echo '<p>Error al crear la reserva: ' . $result['message'] . '</p>';
-                }
-            }
-            include('plantillas/reserva.php');
             break;
         default:
             include('plantillas/reservas.php'); 

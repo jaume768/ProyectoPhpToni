@@ -1,60 +1,59 @@
-<!-- reserva.php -->
-<h2>Realizar una Reserva</h2>
-<form action="particular_view.php?section=create_reservation" method="post" id="adminReservationForm" onsubmit="return validateForm()">
-    <label for="tipoTrayecto">Tipo de Trayecto:</label>
-    <select name="tipoTrayecto" id="tipoTrayecto" onchange="updateFormFields()">
-        <option value="aeropuertoHotel">Aeropuerto a Hotel</option>
-        <option value="hotelAeropuerto">Hotel a Aeropuerto</option>
-        <option value="idaYVuelta">Ida y Vuelta</option>
-    </select>
-    <div id="aeropuertoHotelFields" style="display:none;">
-        <label for="diaLlegada">Día de llegada:</label>
-        <input type="date" id="diaLlegada" name="diaLlegada">
-        <label for="horaLlegada">Hora de llegada:</label>
-        <input type="time" id="horaLlegada" name="horaLlegada">
-        <label for="numeroVueloLlegada">Número del vuelo:</label>
-        <input type="text" id="numeroVueloLlegada" name="numeroVueloLlegada">
-        <label for="origenVuelo">Aeropuerto de origen:</label>
-        <input type="text" id="origenVuelo" name="origenVuelo">
-    </div>
-    <div id="hotelAeropuertoFields" style="display:none;">
-        <label for="diaVuelo">Día del vuelo:</label>
-        <input type="date" id="diaVuelo" name="diaVuelo">
-        <label for="horaVuelo">Hora del vuelo:</label>
-        <input type="time" id="horaVuelo" name="horaVuelo">
-        <label for="numeroVueloSalida">Número de vuelo:</label>
-        <input type="text" id="numeroVueloSalida" name="numeroVueloSalida">
-        <label for="horaRecogida">Hora de recogida:</label>
-        <input type="time" id="horaRecogida" name="horaRecogida">
-    </div>
-    <label for="hotelDestino">Hotel de destino/recogida:</label>
-    <input type="text" id="hotelDestino" name="hotelDestino">
-    <label for="numViajeros">Número de viajeros:</label>
-    <input type="number" id="numViajeros" name="numViajeros">
-    <label for="datosPersonales">Datos personales del reservante (si no se han ingresado previamente):</label>
-    <textarea id="datosPersonales" name="datosPersonales"></textarea>
-    <input type="submit" value="Crear Reserva">
-</form>
-<script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Reserva</title>
+    <script>
+        function updateFormVisibility() {
+            var tipoReserva = document.getElementById("id_tipo_reserva").value;
+            document.getElementById("aeropuerto-hotel").style.display = tipoReserva === "1" || tipoReserva === "3" ? "block" : "none";
+            document.getElementById("hotel-aeropuerto").style.display = tipoReserva === "2" || tipoReserva === "3" ? "block" : "none";
+        }
+    </script>
+</head>
+<body>
+    <h2>Crear Reserva</h2>
+    <form action="../controllers/insertar_reserva.php" method="post">
+        Tipo de Reserva:
+        <select name="id_tipo_reserva" id="id_tipo_reserva" onchange="updateFormVisibility()" required>
+            <option value="1">Aeropuerto a Hotel</option>
+            <option value="2">De Hotel a Aeropuerto</option>
+            <option value="3">Trayectos de Ida y Vuelta</option>
+        </select><br>
         
-function updateFormFields() {
-    var selectedOption = document.getElementById('tipoTrayecto').value;
-    var aeropuertoHotelFields = document.getElementById('aeropuertoHotelFields');
-    var hotelAeropuertoFields = document.getElementById('hotelAeropuertoFields');
+        <div id="aeropuerto-hotel" style="display:none;">
+            <h3>Detalles de Llegada al Hotel</h3>
+            Día de Llegada: <input type="date" name="dia_llegada"><br>
+            Hora de Llegada: <input type="time" name="hora_llegada"><br>
+            Número de Vuelo: <input type="text" name="numero_vuelo_llegada"><br>
+            Origen: <input type="text" name="origen_vuelo_entrada"><br>
+            Aeropuerto de Origen: <input type="text" name="aeropuerto_origen"><br>
+        </div>
+        
+        <div id="hotel-aeropuerto" style="display:none;">
+            <h3>Detalles del Vuelo desde Hotel</h3>
+            Día del Vuelo: <input type="date" name="dia_vuelo"><br>
+            Hora del Vuelo: <input type="time" name="hora_vuelo"><br>
+            Número de Vuelo: <input type="text" name="numero_vuelo_salida"><br>
+            Hora de Recogida: <input type="time" name="hora_recogida"><br>
+        </div>
 
-    aeropuertoHotelFields.style.display = 'none';
-    hotelAeropuertoFields.style.display = 'none';
+        Hotel de Destino/Recogida:
+        <select name="id_hotel" required>
+            <?php include __DIR__ . '/../../controllers/hotelController.php';
+                  $hotelController = new hotelController($conn); 
+                  echo $hotelController->getHotelOptions(); ?>
+        </select><br>
+        
+        Número de Viajeros: <input type="number" name="num_viajeros" required><br>
+        <input type="submit" value="Enviar">
+    </form>
 
-    if (selectedOption == 'aeropuertoHotel' || selectedOption == 'idaYVuelta') {
-        aeropuertoHotelFields.style.display = 'block';
-    }
-    if (selectedOption == 'hotelAeropuerto' || selectedOption == 'idaYVuelta') {
-        hotelAeropuertoFields.style.display = 'block';
-    }
-}
-
-// Inicializar el formulario para mostrar los campos correctos al cargar
-document.addEventListener('DOMContentLoaded', function () {
-    updateFormFields();
-});
-</script>
+    <script>
+        // Asegurar que el formulario se carga con los campos correctos visibles
+        window.onload = function() {
+            updateFormVisibility();
+        };
+    </script>
+</body>
+</html>
