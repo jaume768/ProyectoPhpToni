@@ -14,6 +14,9 @@ function loadSection($section) {
         case 'datos':
             include('plantillas/datos.php');
             break;
+        case 'ver_reservas':
+            include('plantillas/reservas_particulares.php');
+            break;
         default:
             include('plantillas/reserva_admin.php'); 
     }
@@ -22,7 +25,7 @@ function loadSection($section) {
 if (isset($_GET['section'])) {
     $section = $_GET['section'];
 } else {
-    $section = 'reserva';  // Set default section to 'reserva'
+    $section = 'reserva'; 
 }
 ?>
 
@@ -40,11 +43,12 @@ if (isset($_GET['section'])) {
     <nav>
         <ul>
             <li><a href="admin_view.php?section=reserva" <?php echo ($section == 'reserva' ? 'class="active"' : ''); ?>>Crear Reserva</a></li>
-            <li><a href="admin_view.php?section=datos" <?php echo ($section == 'datos' ? 'class="active"' : ''); ?>>Mis datos</a></li>
+            <li><a href="admin_view.php?section=datos" <?php echo ($section == 'datos' ? 'class="active"' : ''); ?>>Mis Datos</a></li>
+            <li><a href="admin_view.php?section=ver_reservas" <?php echo ($section == 'ver_reservas' ? 'class="active"' : ''); ?>>Ver Reservas</a></li>
         </ul>
     </nav>
 
-    <?php loadSection($section); // Load the section based on the user's selection ?>
+    <?php loadSection($section); ?>
 </div>
 </body>
 </html>

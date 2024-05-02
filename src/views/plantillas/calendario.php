@@ -7,8 +7,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
 $userController = new UserController($conn);
 
-// Conexión a la base de datos
-$email = $_SESSION['email'] ?? null; // Esto se establecería durante el login
+$email = $_SESSION['email'] ?? null;
 
 $startDate = $_POST['startDate'] ?? date('Y-m-01');
 $endDate = $_POST['endDate'] ?? date('Y-m-t');

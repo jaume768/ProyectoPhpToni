@@ -8,7 +8,7 @@
 <div class="container">
         <h2>REGISTRO</h2>
         <form action="../controllers/auth_controller.php" method="post">
-            <input type="hidden" name="action" value="register"> <!-- Hidden field to indicate the action -->
+            <input type="hidden" name="action" value="register">
             <?php if (isset($_GET['error'])) { ?>
                 <p class="error"><?php echo $_GET['error']; ?></p>
             <?php } ?><br>

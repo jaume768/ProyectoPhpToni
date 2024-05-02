@@ -68,6 +68,14 @@ class UserController {
     public function closeDB() {
         $this->db->close();
     }
+
+    public function cancelReservation($idReserva) {
+        $stmt = $this->db->prepare("DELETE FROM transfer_reservas WHERE id_reserva = ?");
+        $stmt->bind_param("i", $idReserva);
+        $stmt->execute();
+        $stmt->close();
+    }
+    
     
 }
 
