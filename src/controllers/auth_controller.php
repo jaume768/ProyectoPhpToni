@@ -14,11 +14,10 @@ switch ($_POST['action']) {
 
 function registerUser($conn) {
     // Recibir los datos del formulario
-    extract($_POST);
 
-    // Check if 'rol' is empty and assign a default value
+    extract($_POST);
     if (empty($rol)) {
-        $rol = 'Particular'; // Default role if none provided
+        $rol = 'Particular'; 
     }
 
     // Encriptar la contraseña

@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 $localizador = substr(md5(uniqid(rand(), true)), 0, 4);
-$email_cliente = $_SESSION['email'];
+$email_cliente = isset($_POST['emailCliente']) ? $_POST['emailCliente'] : $_SESSION['email'];
 
 // Preparar y vincular parámetros
 $stmt = $conn->prepare("INSERT INTO transfer_reservas (localizador, id_hotel, id_tipo_reserva, email_cliente, fecha_reserva, fecha_modificacion, id_destino, fecha_entrada, hora_entrada, numero_vuelo_entrada, origen_vuelo_entrada, hora_vuelo_salida, fecha_vuelo_salida, num_viajeros, id_vehiculo) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?, NOW(), ?, ?, 1)");
@@ -36,9 +36,9 @@ if(isset($_POST['dia_vuelo']) && !empty($_POST['dia_vuelo'])) {
 }
 $num_viajeros = $_POST['num_viajeros'];
 
-
 if ($stmt->execute()) {
-    echo '<script>window.location.href="../views/particular_view.php";</script>';
+    $redirectPage = !empty($_POST['emailCliente']) ? "../views/admin_view.php" : "../views/particular_view.php";
+    echo '<script>window.location.href="' . $redirectPage . '";</script>';
 } else {
     echo "Error: " . $stmt->error;
 }

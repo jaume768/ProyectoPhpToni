@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['email']) || $_SESSION['rol'] !== 'Particular') {
+    echo '<script>window.location.href="login_view.php?msg=Acceso denegado. Debe iniciar sesión como particular";</script>';
+    exit();
+}
+
 function loadSection($section) {
     switch ($section) {
         case 'reserva':

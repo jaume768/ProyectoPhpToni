@@ -1,9 +1,20 @@
 <?php
 include __DIR__ . '/../../controllers/UserController.php';
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
 $userController = new UserController($conn);
 
-// Suponiendo que el email del usuario se almacena en la sesión al iniciar sesión
-$email = "pepe@gmail.com";
+// Comprobar que la sesión tiene un email y un rol definidos antes de usarlos
+if (!isset($_SESSION['email']) || !isset($_SESSION['rol'])) {
+    // Redirigir al usuario al login si no está definido el email o el rol
+    header("Location: ../views/login_view.php");
+    exit();
+}
+
+$email = $_SESSION['email'];
+$rol = $_SESSION['rol'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -19,12 +30,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_POST['email']
     );
 
-    header("Location: ../particular_view.php?section=datos");
-    exit(); // Es una buena práctica llamar a exit() después de una redirección.
+    $_SESSION['update_success'] = "Datos actualizados con éxito.";
+
+    if ($rol === 'Particular') {
+        header("Location: ../particular_view.php?section=datos");
+    } else {
+        header("Location: ../admin_view.php?section=datos");
+    }
+    exit();
 }
 
 $user = $userController->getUserByEmail($email);
 ?>
+
+<?php if (isset($_SESSION['update_success'])): ?>
+    <div class="alert alert-success">
+        <?= $_SESSION['update_success']; ?>
+        <?php unset($_SESSION['update_success']); // Eliminar el mensaje después de mostrarlo ?>
+    </div>
+<?php endif; ?>
 <h2>Mis Datos Personales</h2>
 <form id="personalInfoForm" action="../views/plantillas/datos.php" method="post">
     <input type="hidden" name="id" value="<?php echo $user['id_viajero']; ?>">
