@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: mysql
--- Tiempo de generación: 29-04-2024 a las 09:55:11
+-- Tiempo de generación: 02-05-2024 a las 06:11:08
 -- Versión del servidor: 8.3.0
 -- Versión de PHP: 8.2.8
 
@@ -31,20 +31,15 @@ CREATE TABLE `tranfer_hotel` (
   `id_hotel` int NOT NULL,
   `id_zona` int DEFAULT NULL,
   `Comision` int DEFAULT NULL,
-  `usuario` int DEFAULT NULL,
-  `password` varchar(100) NOT NULL
+  `nombre` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Volcado de datos para la tabla `tranfer_hotel`
 --
 
-INSERT INTO `tranfer_hotel` (`id_hotel`, `id_zona`, `Comision`, `usuario`, `password`) VALUES
-(1, 1, 10, 1, 'pass123'),
-(2, 2, 15, 2, 'pass456'),
-(3, 3, 20, 3, 'pass789'),
-(4, 1, 25, 4, 'pass012'),
-(5, 2, 30, 5, 'pass345');
+INSERT INTO `tranfer_hotel` (`id_hotel`, `id_zona`, `Comision`, `nombre`) VALUES
+(6, 1, 10, 'Hotel Sunset');
 
 -- --------------------------------------------------------
 
@@ -64,11 +59,11 @@ CREATE TABLE `transfer_precios` (
 --
 
 INSERT INTO `transfer_precios` (`id_precios`, `id_vehiculo`, `id_hotel`, `Precio`) VALUES
-(1, 1, 1, 50),
-(2, 2, 2, 60),
-(3, 3, 3, 70),
-(4, 4, 4, 80),
-(5, 5, 5, 90);
+(1, 1, 6, 50),
+(2, 2, 6, 60),
+(3, 3, 6, 70),
+(4, 4, 6, 80),
+(5, 5, 6, 90);
 
 -- --------------------------------------------------------
 
@@ -82,15 +77,15 @@ CREATE TABLE `transfer_reservas` (
   `id_hotel` int DEFAULT NULL COMMENT 'Es el hotel que realiza la reserva',
   `id_tipo_reserva` int NOT NULL,
   `email_cliente` varchar(100) NOT NULL,
-  `fecha_reserva` datetime NOT NULL,
+  `fecha_reserva` datetime DEFAULT NULL,
   `fecha_modificacion` datetime NOT NULL,
   `id_destino` int NOT NULL,
-  `fecha_entrada` date NOT NULL,
-  `hora_entrada` time NOT NULL,
-  `numero_vuelo_entrada` varchar(50) NOT NULL,
-  `origen_vuelo_entrada` varchar(50) NOT NULL,
-  `hora_vuelo_salida` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `fecha_vuelo_salida` date NOT NULL,
+  `fecha_entrada` date DEFAULT NULL,
+  `hora_entrada` time DEFAULT NULL,
+  `numero_vuelo_entrada` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `origen_vuelo_entrada` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `hora_vuelo_salida` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `fecha_vuelo_salida` date DEFAULT NULL,
   `num_viajeros` int NOT NULL,
   `id_vehiculo` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
@@ -100,13 +95,22 @@ CREATE TABLE `transfer_reservas` (
 --
 
 INSERT INTO `transfer_reservas` (`id_reserva`, `localizador`, `id_hotel`, `id_tipo_reserva`, `email_cliente`, `fecha_reserva`, `fecha_modificacion`, `id_destino`, `fecha_entrada`, `hora_entrada`, `numero_vuelo_entrada`, `origen_vuelo_entrada`, `hora_vuelo_salida`, `fecha_vuelo_salida`, `num_viajeros`, `id_vehiculo`) VALUES
-(6, 'XYZ123', 1, 1, 'juan.perez@example.com', '2024-04-27 08:00:00', '2024-04-27 08:00:00', 1, '2024-05-01', '10:00:00', 'AB123', 'City1', '2024-05-01 12:00:00', '2024-05-01', 2, 1),
-(7, 'XYZ456', 2, 2, 'ana.lopez@example.com', '2024-04-27 09:00:00', '2024-04-27 09:00:00', 2, '2024-05-02', '11:00:00', 'CD456', 'City2', '2024-05-02 13:00:00', '2024-05-02', 3, 2),
-(8, 'XYZ789', 3, 1, 'carlos.martin@example.com', '2024-04-27 10:00:00', '2024-04-27 10:00:00', 3, '2024-05-03', '12:00:00', 'EF789', 'City3', '2024-05-03 14:00:00', '2024-05-03', 4, 3),
-(9, 'XYZ012', 4, 2, 'laura.gomez@example.com', '2024-04-27 11:00:00', '2024-04-27 11:00:00', 4, '2024-05-04', '13:00:00', 'GH012', 'City4', '2024-05-04 15:00:00', '2024-05-04', 5, 4),
-(10, 'XYZ345', 5, 1, 'elena.moreno@example.com', '2024-04-27 12:00:00', '2024-04-27 12:00:00', 5, '2024-05-05', '14:00:00', 'IJ345', 'City5', '2024-05-05 16:00:00', '2024-05-05', 6, 5),
-(11, 'RES1000', 1, 1, 'juan.perez@example.com', '2024-04-27 08:00:00', '2024-04-27 08:00:00', 1, '2024-05-01', '10:00:00', 'AB123', 'City1', '2024-05-01 12:00:00', '2024-05-01', 2, 1),
-(12, 'RES1001', 2, 2, 'ana.lopez@example.com', '2024-04-27 09:00:00', '2024-04-27 09:00:00', 2, '2024-05-02', '11:00:00', 'CD456', 'City2', '2024-05-02 13:00:00', '2024-05-02', 3, 2);
+(6, 'XYZ123', 6, 1, 'juan.perez@example.com', '2024-04-27 08:00:00', '2024-04-27 08:00:00', 1, '2024-05-01', '10:00:00', 'AB123', 'City1', '2024-04-30 17:29:38', '2024-05-01', 2, 1),
+(7, 'XYZ456', 6, 2, 'ana.lopez@example.com', '2024-04-27 09:00:00', '2024-04-27 09:00:00', 2, '2024-05-02', '11:00:00', 'CD456', 'City2', '2024-04-30 17:29:38', '2024-05-02', 3, 2),
+(8, 'XYZ789', 6, 1, 'carlos.martin@example.com', '2024-04-27 10:00:00', '2024-04-27 10:00:00', 3, '2024-05-03', '12:00:00', 'EF789', 'City3', '2024-04-30 17:29:38', '2024-05-03', 4, 3),
+(9, 'XYZ012', 6, 2, 'laura.gomez@example.com', '2024-04-27 11:00:00', '2024-04-27 11:00:00', 4, '2024-05-04', '13:00:00', 'GH012', 'City4', '2024-04-30 17:29:38', '2024-05-04', 5, 4),
+(10, 'XYZ345', 6, 1, 'elena.moreno@example.com', '2024-04-27 12:00:00', '2024-04-27 12:00:00', 5, '2024-05-05', '14:00:00', 'IJ345', 'City5', '2024-04-30 17:29:38', '2024-05-05', 6, 5),
+(11, 'RES1000', 6, 1, 'juan.perez@example.com', '2024-04-27 08:00:00', '2024-04-27 08:00:00', 1, '2024-05-01', '10:00:00', 'AB123', 'City1', '2024-04-30 17:29:38', '2024-05-01', 2, 1),
+(12, 'RES1001', 6, 2, 'ana.lopez@example.com', '2024-04-27 09:00:00', '2024-04-27 09:00:00', 2, '2024-05-02', '11:00:00', 'CD456', 'City2', '2024-04-30 17:29:38', '2024-05-02', 3, 2),
+(13, '121fsd', 6, 1, 'pepe@gmail.com', '1111-12-12 12:12:00', '1111-11-11 12:12:00', 1, '1111-12-12', '12:12:00', '1', '1', '2024-04-30 17:29:38', '1111-11-11', 1, 1),
+(14, '12a2', 6, 1, 'pepe@gmail.com', '1324-12-11 01:12:00', '2024-04-30 17:18:02', 1, '2000-12-12', '12:45:00', '1', '1', '2024-04-30 17:29:38', '4322-03-02', 1, 1),
+(17, 'b50d', 6, 1, 'pepe@gmail.com', '1211-11-12 12:11:00', '2024-04-30 18:18:26', 6, '2000-11-11', '12:11:00', '1', '1', '2024-04-30 18:18:26', '1111-11-11', 1, 1),
+(18, '8968', 6, 1, 'pepe@gmail.com', '1111-11-11 11:11:00', '2024-04-30 18:20:47', 6, '2000-11-11', '11:11:00', '1', '1', '2024-04-30 18:20:47', '1111-11-11', 1, 1),
+(19, 'c1e9', 6, 1, 'pepe@gmail.com', '1111-11-11 11:11:00', '2024-04-30 18:21:15', 6, '2000-11-11', '11:11:00', '1', '1', '2024-04-30 18:21:15', '1111-11-11', 1, 1),
+(25, 'ea1b', 6, 3, 'pepe@gmail.com', '1112-11-11 00:00:00', '2024-05-01 13:51:19', 6, '2000-11-12', '11:11:00', '1', '1', '2024-05-01 13:51:19', '1111-11-11', 1, 1),
+(26, 'ce19', 6, 1, 'pepe@gmail.com', '1111-11-11 00:00:00', '2024-05-01 13:56:52', 6, '2000-11-11', '11:11:00', '1', '1', '2024-05-01 13:56:52', NULL, 1, 1),
+(27, 'c1df', 6, 2, 'pepe@gmail.com', '1111-11-11 00:00:00', '2024-05-01 13:57:31', 6, '2000-11-11', '11:11:00', '1', '1', '2024-05-01 13:57:31', '1111-11-11', 1, 1),
+(28, 'b09d', 6, 1, 'pepe@gmail.com', '1111-11-11 00:00:00', '2024-05-01 14:00:00', 6, '2000-11-11', '11:11:00', '1', '1', '2024-05-01 14:00:00', NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -199,7 +203,7 @@ INSERT INTO `transfer_viajeros` (`id_viajero`, `nombre`, `apellido1`, `apellido2
 
 CREATE TABLE `transfer_zona` (
   `id_zona` int NOT NULL,
-  `descripcion` int NOT NULL
+  `descripcion` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
@@ -207,11 +211,11 @@ CREATE TABLE `transfer_zona` (
 --
 
 INSERT INTO `transfer_zona` (`id_zona`, `descripcion`) VALUES
-(1, 101),
-(2, 102),
-(3, 103),
-(4, 104),
-(5, 105);
+(1, '101'),
+(2, '102'),
+(3, '103'),
+(4, '104'),
+(5, '105');
 
 --
 -- Índices para tablas volcadas
@@ -275,13 +279,13 @@ ALTER TABLE `transfer_zona`
 -- AUTO_INCREMENT de la tabla `tranfer_hotel`
 --
 ALTER TABLE `tranfer_hotel`
-  MODIFY `id_hotel` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_hotel` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `transfer_reservas`
 --
 ALTER TABLE `transfer_reservas`
-  MODIFY `id_reserva` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_reserva` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `transfer_tipo_reserva`
