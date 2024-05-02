@@ -34,8 +34,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($rol === 'Particular') {
         header("Location: ../particular_view.php?section=datos");
-    } else {
+    } else if ($rol === 'Administrador'){
         header("Location: ../admin_view.php?section=datos");
+    } else {
+        header("Location: ../conductor_view.php?section=datos");
     }
     exit();
 }
