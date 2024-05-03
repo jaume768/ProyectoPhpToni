@@ -20,7 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cancel'])) {
 }
 
 $userController->closeDB();
-
 ?>
 <div>
     <h2>Buscar Reservas por Email</h2>
@@ -43,6 +42,7 @@ $userController->closeDB();
                     <th>Fecha de Entrada</th>
                     <th>Detalles del Vuelo</th>
                     <th>Num. de Viajeros</th>
+                    <th>Acciones</th>
                 </tr>
                 <?php foreach ($reservations as $reservation): ?>
                 <tr>
@@ -55,6 +55,13 @@ $userController->closeDB();
                         Vuelo <?= htmlspecialchars($reservation['numero_vuelo_entrada']) ?> desde <?= htmlspecialchars($reservation['origen_vuelo_entrada']) ?>
                     </td>
                     <td><?= htmlspecialchars($reservation['num_viajeros']) ?></td>
+                    <td>
+                        <form method="post">
+                            <input type="hidden" name="id_reserva" value="<?= $reservation['id_reserva'] ?>">
+                            <input type="hidden" name="email" value="<?= htmlspecialchars($email) ?>">
+                            <input type="submit" name="cancel" value="Cancelar">
+                        </form>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
             </table>
@@ -63,4 +70,3 @@ $userController->closeDB();
         <?php endif;
     endif; ?>
 </div>
-
